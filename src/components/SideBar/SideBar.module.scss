@@ -1,0 +1,28 @@
+.sideBar {
+    color: #ffffff;
+    padding: 12px 0;
+    overflow-y: auto;
+}
+
+.baseMenu {
+    font-weight: bolder;
+}
+
+.logo {
+    height: 50px;
+    margin-bottom: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+
+    img:last-child {
+        height: 50px;
+        width: 120px;
+        background: linear-gradient(-225deg, #343836 0%, #212322 100%);
+    }
+
+    img:first-child {
+        height: 50px;
+        width: 50px;
+    }
+}
