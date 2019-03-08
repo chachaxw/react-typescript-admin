@@ -1,6 +1,6 @@
 {
-    "name": "ctirobot-react-central",
-    "description": "A brand new font-end architecture for CTI robot central control platform",
+    "name": "react-typescript-admin",
+    "description": "A starter template for TypeScript and React with AntDesign and Dva",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

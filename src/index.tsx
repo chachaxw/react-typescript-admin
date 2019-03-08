@@ -13,17 +13,17 @@ import Page from './Page';
 const errorDuration = 3;
 
 const app = dva({
-    onError(e) {
-        // Catch redux action errors
-        message.error(e.message, errorDuration);
-    },
+  onError(e) {
+    // Catch redux action errors
+    message.error(e.message, errorDuration);
+  },
 
-    onAction: createLogger(),
+  onAction: createLogger(),
 
-    // 其他第三方 Reducer 配置
-    extraReducers: {
-        form: formReducer,
-    },
+  // 其他第三方 Reducer 配置
+  extraReducers: {
+    form: formReducer,
+  },
 });
 
 // 第三方插件

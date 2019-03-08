@@ -1,4 +1,4 @@
-# CTIRobot React Central 开发说明文档
+# React Typescript Admin 开发说明文档
 
 该项目由 [Create React App](https://github.com/facebook/create-react-app) 提供技术支持
 
@@ -53,10 +53,6 @@
 
 构建生产资源到 `build` 目录, 此时环境变量为`production`
 相关详情请阅读 [deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn staging` or `npm run staging`
-
-构建`staging`生产资源到`build` 目录, 此时环境变量为`staging`
 
 ### `yarn check` or `npm run check`
 
