@@ -4,6 +4,6 @@
 
 .Footer {
   text-align: center;
-  border-top: 1px solid #e8e8e8;
   background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,.08);
 }

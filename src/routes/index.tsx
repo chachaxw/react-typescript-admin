@@ -7,85 +7,85 @@ import { Auth } from '../models/global';
 import AllPages from '../pages';
 
 interface InternalProps {
-    app: any;
-    auth: Auth;
-    onRouterChange: (title: string) => void;
+  app: any;
+  auth: Auth;
+  onRouterChange: (title: string) => void;
 }
 
 export default class AppRoutes extends Component<InternalProps> {
 
-    public requireAuth(permission: string, component: any) {
-        const { auth } = this.props;
-        const { permissions } = auth;
+  public requireAuth(permission: string, component: any) {
+    const { auth } = this.props;
+    const { permissions } = auth;
 
-        if (!permissions || !permissions.includes(permission)) {
-            return <Redirect to="/404" />;
-        }
-
-        return component;
+    if (!permissions || !permissions.includes(permission)) {
+      return <Redirect to="/404" />;
     }
 
-    public requireLogin(component: any, permission?: string) {
-        const { auth } = this.props;
-        const { isAuthenticated, permissions } = auth;
+    return component;
+  }
 
-        if (!isAuthenticated || !permissions) { // 判断是否登录
-            return <Redirect to={'/login'} />;
-        }
+  public requireLogin(component: any, permission?: string) {
+    const { auth } = this.props;
+    const { isAuthenticated, permissions } = auth;
 
-        return permission ? this.requireAuth(permission, component) : component;
+    if (!isAuthenticated || !permissions) { // 判断是否登录
+      return <Redirect to={'/login'} />;
     }
 
-    public render() {
-        const { app, onRouterChange } = this.props;
+    return permission ? this.requireAuth(permission, component) : component;
+  }
 
-        return (
-            <Switch>
-                {Object.keys(routesConfig).map((key: string) =>
-                    routesConfig[key].map((config: RouteConfig, index: number) => {
-                        const route = (config: RouteConfig) => {
-                            const { path, component, name } = config;
-                            const Component = AllPages[component];
+  public render() {
+    const { app, onRouterChange } = this.props;
 
-                            return Component && (
-                                <Route
-                                    exact
-                                    key={index}
-                                    path={path}
-                                    render={(props: RouteComponentProps<any>) => {
-                                        // 匹配 location query 字段
-                                        const reg = /\?\S*/g;
-                                        const queryParams = window.location.hash.match(reg);
-                                        const { params } = props.match;
+    return (
+      <Switch>
+        {Object.keys(routesConfig).map((key: string) =>
+          routesConfig[key].map((config: RouteConfig, index: number) => {
+            const route = (config: RouteConfig) => {
+              const { path, component, name } = config;
+              const Component = AllPages[component];
 
-                                        Object.keys(params).forEach((key: string) => {
-                                            params[key] = params[key] && params[key].replace(reg, '');
-                                        });
+              return Component && (
+                <Route
+                  exact
+                  key={index}
+                  path={path}
+                  render={(props: RouteComponentProps<any>) => {
+                    // 匹配 location query 字段
+                    const reg = /\?\S*/g;
+                    const queryParams = window.location.hash.match(reg);
+                    const { params } = props.match;
 
-                                        props.match.params = { ...params };
+                    Object.keys(params).forEach((key: string) => {
+                      params[key] = params[key] && params[key].replace(reg, '');
+                    });
 
-                                        const mergeProps = {
-                                            app,
-                                            ...props,
-                                            query: queryParams ? queryString.parse(queryParams[0]) : {},
-                                        };
+                    props.match.params = { ...params };
 
-                                        if (onRouterChange) {
-                                            onRouterChange && onRouterChange(`坎德拉物流中控平台-${name}`);
-                                        }
+                    const mergeProps = {
+                      app,
+                      ...props,
+                      query: queryParams ? queryString.parse(queryParams[0]) : {},
+                    };
 
-                                        return this.requireLogin(<Component {...mergeProps} />, config.auth);
-                                    }}
-                                />
-                            );
-                        };
+                    if (onRouterChange) {
+                      onRouterChange && onRouterChange(`坎德拉物流中控平台-${name}`);
+                    }
 
-                        return config.component ? route(config) :
-                                config.children && config.children.map((d: RouteConfig) => route(d));
-                    })
-                )}
-                <Route render={() => <Redirect to="/exception/404" />} />
-            </Switch>
-        );
-    }
+                    return this.requireLogin(<Component {...mergeProps} />, config.auth);
+                  }}
+                />
+              );
+            };
+
+            return config.component ? route(config) :
+                    config.children && config.children.map((d: RouteConfig) => route(d));
+          })
+        )}
+        <Route render={() => <Redirect to="/exception/404" />} />
+      </Switch>
+    );
+  }
 }

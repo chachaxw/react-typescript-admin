@@ -1,5 +1,2 @@
-// API url enum
-
-const API_VERSION = 'v1';
-
+// API url config
 export const ApiUrl = {};

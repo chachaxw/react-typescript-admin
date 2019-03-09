@@ -35,31 +35,31 @@
 
 在该项目目录下, 你可以运行以下命令:
 
-### `yarn start` or `npm start`
+`yarn start` or `npm start`
 
 以开发模式运行该项目
 然后打开Chrome浏览器访问[http://localhost:3000](http://localhost:3000).
 
-### `yarn test` or `npm test`
+`yarn test` or `npm test`
 
 以监控模式运行Jest测试用例，编写测试的时候可以用此命令
 相关详情请阅读[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
 
-### `yarn jest` or `npm jest`
+`yarn jest` or `npm jest`
 
 以普通模式运行Jest测试用例
 
-### `yarn build` or `npm run build`
+`yarn build` or `npm run build`
 
 构建生产资源到 `build` 目录, 此时环境变量为`production`
 相关详情请阅读 [deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `yarn check` or `npm run check`
+`yarn check` or `npm run check`
 
 TSLint 语法检查，检查Typescript文件是否符合 tslint.json 配置规范
 相关详情请阅读 [TSLint Rules](https://github.com/palantir/tslint/tree/master/test/rules)
 
-### `yarn tslint` or `npm run tslint`
+`yarn tslint` or `npm run tslint`
 
 自动修复不符合tslint.json规范的代码，遇到`git commit`提交报tslint错误时，可以运行此命令修复
 

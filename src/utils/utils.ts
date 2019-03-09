@@ -9,8 +9,8 @@ import pathToRegexp from 'path-to-regexp';
  * @return {string[]}
  */
 export function urlToList(url: string): string[] {
-    const urlList = url.split('/').filter((i: string) => i);
-    return urlList.map((item: string, index) => `/${urlList.slice(0, index + 1).join('/')}`);
+  const urlList = url.split('/').filter((i: string) => i);
+  return urlList.map((item: string, index) => `/${urlList.slice(0, index + 1).join('/')}`);
 }
 
 /**
@@ -22,14 +22,14 @@ export function urlToList(url: string): string[] {
  * @return {string[]}
  */
 export function getFlatMenuKeys(menu: any[]): string[] {
-    let keys: any[] = [];
-    menu.forEach((item: any) => {
-        keys.push(item.path);
-        if (item.children) {
-            keys = keys.concat(getFlatMenuKeys(item.children));
-        }
-    });
-    return keys;
+  let keys: any[] = [];
+  menu.forEach((item: any) => {
+    keys.push(item.path);
+    if (item.children) {
+      keys = keys.concat(getFlatMenuKeys(item.children));
+    }
+  });
+  return keys;
 }
 
 /**
@@ -38,13 +38,13 @@ export function getFlatMenuKeys(menu: any[]): string[] {
  * @param {string[]}
  */
 export function getMenuMatches(flatMenuKeys: string[], path: string): string[] {
-    const menus = flatMenuKeys.filter((item: string) => {
-        if (!item) {
-            return;
-        }
-        return pathToRegexp(item).test(path);
-    });
-    return menus;
+  const menus = flatMenuKeys.filter((item: string) => {
+    if (!item) {
+      return;
+    }
+    return pathToRegexp(item).test(path);
+  });
+  return menus;
 }
 
 /**
@@ -55,12 +55,12 @@ export function getMenuMatches(flatMenuKeys: string[], path: string): string[] {
  * @return {string[]}
  */
 export function getDefaultCollapsedSubMenus(pathname: string, flatMenuKeys: string[]): string[] {
-    const subMenus = urlToList(pathname)
-        .map((item: string) => getMenuMatches(flatMenuKeys, item)[0])
-        .filter((item: string) => item)
-        .reduce((acc: any, curr: any) => [...acc, curr], ['/']);
+  const subMenus = urlToList(pathname)
+    .map((item: string) => getMenuMatches(flatMenuKeys, item)[0])
+    .filter((item: string) => item)
+    .reduce((acc: any, curr: any) => [...acc, curr], ['/']);
 
-    return subMenus;
+  return subMenus;
 }
 
 /**
@@ -69,13 +69,13 @@ export function getDefaultCollapsedSubMenus(pathname: string, flatMenuKeys: stri
  * @return {string}
  */
 export function formatSeconds(num: number): string {
-    if (!num) {
-        return '';
-    }
+  if (!num) {
+    return '';
+  }
 
-    const minutes = ~~((num / 60) % 60);
-    const hours = ~~(num / (60 * 60));
-    const seconds = ~~(num % 60);
+  const minutes = ~~((num / 60) % 60);
+  const hours = ~~(num / (60 * 60));
+  const seconds = ~~(num % 60);
 
-    return `${hours > 0 ? hours + '小时' : ''}${minutes > 0 ? minutes + '分' : ''}${seconds > 0 ? seconds + '秒' : ''}`;
+  return `${hours > 0 ? hours + '小时' : ''}${minutes > 0 ? minutes + '分' : ''}${seconds > 0 ? seconds + '秒' : ''}`;
 }
