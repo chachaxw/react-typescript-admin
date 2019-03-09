@@ -1,84 +1,89 @@
-import { Col, Row, Skeleton } from 'antd';
+import { Card, Col, Icon, Row, Skeleton, Statistic } from 'antd';
 import { connect } from 'dva';
 import React, { Component } from 'react';
 
 import { BreadCrumbs } from '../../components';
-import { formatSeconds } from '../../utils/utils';
 import styles from './Dashboard.module.scss';
 
+const Countdown = Statistic.Countdown;
+const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
+
 interface DvaProps {
-    total?: any;
-    today?: any;
-    loading: boolean;
+  summary?: any;
+  loading: boolean;
 }
 
 class Dashboard extends Component<DvaProps> {
 
-    constructor(props: DvaProps) {
-        super(props);
-    }
+  constructor(props: DvaProps) {
+    super(props);
+  }
 
-    public render() {
-        const { loading, total, today } = this.props;
+  public render() {
+    const { loading, summary } = this.props;
 
-        return (
-            <div className={styles.dashboard}>
-                <BreadCrumbs />
-                <Row>
-                    <Col md={4}>
-                        <Skeleton title={false} active loading={loading}>
-                            <div className="text-muted">累计订单</div>
-                            <h2>{total && total.count && total.count.total || 0}</h2>
-                        </Skeleton>
-                    </Col>
-                    <Col md={4}>
-                        <Skeleton title={false} active loading={loading}>
-                            <div className="text-muted">累计车配送订单</div>
-                            <h2>{total && total.count && total.count.robot || 0}</h2>
-                        </Skeleton>
-                    </Col>
-                    <Col md={4}>
-                        <Skeleton title={false} active loading={loading}>
-                            <div className="text-muted">订单配送平均用时</div>
-                            <h2>
-                                {total && total.timing ? formatSeconds(total.timing.transit / 1000) : 0}
-                            </h2>
-                        </Skeleton>
-                    </Col>
-                    <Col md={4}>
-                        <Skeleton title={false} active loading={loading}>
-                            <div className="text-muted">今日订单量</div>
-                            <h2>{today && today.count && today.count.total || 0}</h2>
-                        </Skeleton>
-                    </Col>
-                    <Col md={4}>
-                        <Skeleton title={false} active loading={loading}>
-                            <div className="text-muted">今日车配送订单</div>
-                            <h2>{today && today.count && today.count.robot || 0}</h2>
-                        </Skeleton>
-                    </Col>
-                    <Col md={4}>
-                        <Skeleton title={false} active loading={loading}>
-                            <div className="text-muted">今日订单配送平均用时</div>
-                            <h2>
-                                {today && today.timing && today.timing.transit ?
-                                    formatSeconds(today.timing.transit / 1000) : 0
-                                }
-                            </h2>
-                        </Skeleton>
-                    </Col>
-                </Row>
-            </div>
-        );
-    }
+    return (
+      <div className={styles.dashboard}>
+        <BreadCrumbs />
+        <Row gutter={16}>
+          <Col md={4}>
+            <Skeleton title={false} active loading={loading}>
+              <Card bordered={false}>
+                <Statistic
+                  title="Active"
+                  value={11.28}
+                  precision={2}
+                  valueStyle={{ color: '#3f8600' }}
+                  prefix={<Icon type="arrow-up" />}
+                  suffix="%"
+                />
+              </Card>
+            </Skeleton>
+          </Col>
+          <Col md={4}>
+            <Skeleton title={false} active loading={loading}>
+              <Card bordered={false}>
+                <Statistic
+                  title="Idle"
+                  value={9.3}
+                  precision={2}
+                  valueStyle={{ color: '#cf1322' }}
+                  prefix={<Icon type="arrow-down" />}
+                  suffix="%"
+                />
+              </Card>
+            </Skeleton>
+          </Col>
+          <Col md={8}>
+            <Skeleton title={false} active loading={loading}>
+              <Card bordered={false}>
+                <Countdown title="Day Level" value={deadline} format="D 天 H 时 m 分 s 秒" />
+              </Card>
+            </Skeleton>
+          </Col>
+          <Col md={6}>
+            <Skeleton title={false} active loading={loading}>
+              <Card bordered={false}>
+                <Statistic
+                  title="Feedback"
+                  value={1128}
+                  prefix={<Icon type="like" />}
+                />
+              </Card>
+            </Skeleton>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state: any) => {
-    return {
-        total: state.dashboard.total,
-        today: state.dashboard.today,
-        loading: state.dashboard.loading,
-    };
+  return {
+    total: state.dashboard.total,
+    today: state.dashboard.today,
+    loading: state.dashboard.loading,
+  };
 };
 
 export default connect(mapStateToProps)(Dashboard);

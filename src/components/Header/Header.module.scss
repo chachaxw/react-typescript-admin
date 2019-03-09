@@ -3,7 +3,7 @@
   padding: 0 40px 0 0;
   background-color: white;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  box-shadow: 0 1px 5px rgba(0,0,0,.08);
 }
 
 .headerIcon {
@@ -29,6 +29,7 @@
   :global(.ant-dropdown-menu-item-group-list) {
     list-style: none;
     padding: 0;
+    min-width: 160px;
   }
 
   :global(.ant-dropdown-menu-item-group-title),
