@@ -15,6 +15,7 @@ interface InternalProps {
   width?: number | string;
   menu: MenuItemProps[];
   flatMenuKeys: string[];
+  onCollapse: (collapsed: boolean) => void;
 }
 
 interface InternalState {
@@ -73,12 +74,14 @@ class SideBar extends PureComponent<InternalProps, InternalState> {
 
   public render() {
     const { openKeys } = this.state;
-    const { menu, flatMenuKeys, location, width, collapsed } = this.props;
+    const { menu, flatMenuKeys, location, width, collapsed, onCollapse } = this.props;
     return (
       <Sider
+        collapsible
         width={width || 240}
         collapsed={collapsed}
         className={styles.sideBar}
+        onCollapse={() => onCollapse(!collapsed)}
       >
         <Logo />
         <BaseMenu

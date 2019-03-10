@@ -15,6 +15,7 @@ interface DvaProps {
   auth: Auth;
   location: Location;
   collapsed: boolean;
+  onCollapse: (collapsed: boolean) => void;
 }
 
 interface InternalProps extends DvaProps {
@@ -46,12 +47,12 @@ class App extends Component<InternalProps, InternalState> {
 
   public render() {
     const { title } = this.state;
-    const { app, auth, collapsed, location } = this.props;
+    const { app, auth, collapsed, location, onCollapse } = this.props;
 
     return (
       <DocumentTitle title={title}>
         <Layout className="App">
-          <SideBar collapsed={collapsed} menu={this.menu}
+          <SideBar collapsed={collapsed} menu={this.menu} onCollapse={onCollapse}
             flatMenuKeys={this.flatMenuKeys} location={location} />
           <Layout>
             <Header />
@@ -74,4 +75,15 @@ const mapStateToProps = ({ global }: any) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onCollapse: (collapsed: boolean) => {
+      dispatch({
+        type: 'global/changeLayoutCollapsed',
+        payload: collapsed,
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

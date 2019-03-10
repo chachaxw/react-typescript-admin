@@ -17,6 +17,12 @@ export default {
       path: '/app/dashboard',
       component: 'Dashboard',
     },
+    {
+      name: '用户中心',
+      icon: 'user',
+      path: '/app/user',
+      component: 'UserCenter',
+    },
   ],
   user: [],
 };

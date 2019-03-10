@@ -30,7 +30,7 @@ class Dashboard extends Component<DvaProps> {
             <Skeleton title={false} active loading={loading}>
               <Card bordered={false}>
                 <Statistic
-                  title="Active"
+                  title="活跃"
                   value={11.28}
                   precision={2}
                   valueStyle={{ color: '#3f8600' }}
@@ -44,7 +44,7 @@ class Dashboard extends Component<DvaProps> {
             <Skeleton title={false} active loading={loading}>
               <Card bordered={false}>
                 <Statistic
-                  title="Idle"
+                  title="空闲"
                   value={9.3}
                   precision={2}
                   valueStyle={{ color: '#cf1322' }}
@@ -57,7 +57,7 @@ class Dashboard extends Component<DvaProps> {
           <Col md={8}>
             <Skeleton title={false} active loading={loading}>
               <Card bordered={false}>
-                <Countdown title="Day Level" value={deadline} format="D 天 H 时 m 分 s 秒" />
+                <Countdown title="倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
               </Card>
             </Skeleton>
           </Col>
@@ -65,7 +65,7 @@ class Dashboard extends Component<DvaProps> {
             <Skeleton title={false} active loading={loading}>
               <Card bordered={false}>
                 <Statistic
-                  title="Feedback"
+                  title="反馈"
                   value={1128}
                   prefix={<Icon type="like" />}
                 />

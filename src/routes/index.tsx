@@ -71,7 +71,7 @@ export default class AppRoutes extends Component<InternalProps> {
                     };
 
                     if (onRouterChange) {
-                      onRouterChange && onRouterChange(`坎德拉物流中控平台-${name}`);
+                      onRouterChange && onRouterChange(`React Typescript Admin Starter Template-${name}`);
                     }
 
                     return this.requireLogin(<Component {...mergeProps} />, config.auth);
