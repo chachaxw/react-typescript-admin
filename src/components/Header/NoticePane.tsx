@@ -1,4 +1,4 @@
-import { Avatar, List, Skeleton } from 'antd';
+import { Avatar, Empty, List, Skeleton } from 'antd';
 import { format } from 'date-fns';
 import { Link } from 'dva/router';
 import React, { PureComponent } from 'react';
@@ -72,12 +72,14 @@ class NoticePane extends PureComponent<InternalProps, InternalState> {
             loadMore={() => this.loadMore()}
             hasMore={!loading && hasMore}
           >
-            <List key="notices" dataSource={notices} renderItem={(item: any) => this.renderItem(item)}>
-              {hasMore ?
-                <div className={styles.loadMore}>加载更多</div> :
-                <div className={styles.noMore}>没有更多通知！</div>
-              }
-            </List>
+            {notices && notices.length ?
+              <List key="notices" dataSource={notices} renderItem={(item: any) => this.renderItem(item)}>
+                {hasMore ?
+                  <div className={styles.loadMore}>加载更多</div> :
+                  <div className={styles.noMore}>没有更多通知！</div>
+                }
+              </List> : <Empty description="暂时没有消息！" />
+            }
           </InfiniteScroll>
         </div>
         <div className={styles.noticeBottom} onClick={() => closeNoticePane(false)}>

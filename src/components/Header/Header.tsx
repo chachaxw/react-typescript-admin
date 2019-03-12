@@ -69,13 +69,13 @@ export class Header extends Component<InternalProps, InternalState> {
       <Menu className={styles.dropdownMenu}>
         <Menu.Item key="hello">你好 - Chacha </Menu.Item>
         <ItemGroup title="设置中心">
-          <Menu.Item key="setting:3">个人设置</Menu.Item>
-          <Menu.Item key="setting:4">系统设置</Menu.Item>
+          <Menu.Item key="setting:3"><Icon type="user" /> 个人设置</Menu.Item>
+          <Menu.Item key="setting:4"><Icon type="setting" /> 系统设置</Menu.Item>
         </ItemGroup>
         <ItemGroup title="用户中心">
-          <Menu.Item key="setting:2">个人信息</Menu.Item>
+          <Menu.Item key="setting:2"><Icon type="profile" /> 个人信息</Menu.Item>
           <Menu.Item key="signOut" onClick={() => this.signOut()}>
-              退出登录
+            <Icon type="logout" /> 退出登录
           </Menu.Item>
         </ItemGroup>
       </Menu>
@@ -93,6 +93,9 @@ export class Header extends Component<InternalProps, InternalState> {
           <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
         </div>
         <div className={styles.headerRight}>
+          <div className={styles.headerIcon}>
+            <Icon type="search" />
+          </div>
           <div className={styles.headerIcon} onClick={() => this.setFullScreen()}>
             <Icon type="arrows-alt" />
           </div>
