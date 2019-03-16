@@ -18,6 +18,24 @@ export default {
       component: 'Dashboard',
     },
     {
+      name: '订单中心',
+      icon: 'user',
+      path: '/app/order',
+      component: 'OrderCenter',
+    },
+    {
+      name: '地图中心',
+      icon: 'environment',
+      path: '/app/map',
+      component: 'MapCenter',
+    },
+    {
+      name: '设置中心',
+      icon: 'setting',
+      path: '/app/setting',
+      component: 'SettingCenter',
+    },
+    {
       name: '用户中心',
       icon: 'user',
       path: '/app/user',
