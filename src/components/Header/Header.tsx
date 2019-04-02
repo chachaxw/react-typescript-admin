@@ -112,7 +112,7 @@ export class Header extends Component<InternalProps, InternalState> {
           </Dropdown>
           <Dropdown  overlay={() => this.renderDropdownMenu(userInfo)}>
             <div className={styles.headerIcon}>
-              <Avatar size={32} style={{backgroundColor: '#f56a00', fontSize: 28}}>C</Avatar>
+              <Avatar size={32} style={{backgroundColor: '#f56a00'}}>C</Avatar>
             </div>
           </Dropdown>
         </div>

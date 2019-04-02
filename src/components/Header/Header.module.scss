@@ -86,6 +86,10 @@
     padding-left: 0;
     margin-bottom: 0;
   }
+
+  :global(.ant-empty) {
+    margin: 100px auto;
+  }
 }
 
 .loadMore {

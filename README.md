@@ -40,6 +40,12 @@
 以开发模式运行该项目
 然后打开Chrome浏览器访问[http://localhost:3000](http://localhost:3000).
 
+`yarn mock` or `npm run mock`
+
+运行mock模拟数据服务, 启动后可以用Chrome浏览器访问[http://localhost:3031](http://localhost:3031)
+查看模拟数据服务是否启动
+相关详情请阅读[json-server](https://github.com/typicode/json-server), [faker](https://github.com/Marak/faker.js)
+
 `yarn test` or `npm test`
 
 以监控模式运行Jest测试用例，编写测试的时候可以用此命令
@@ -70,6 +76,8 @@ TSLint 语法检查，检查Typescript文件是否符合 tslint.json 配置规�
 ``` Typescript
 .
 ├── mock/                         # 模拟数据服务
+│   ├── db.js                     # 模拟数据DB
+│   └── routes.json               # 模拟数据API路由配置
 │   └── ...
 ├── public/                       # 静态资源文件（包括css, images, fonts, index.html等）
 │   └── ...
@@ -196,6 +204,10 @@ git-flow 流程中包含 5 类分支，分别是 master、develop、新功能分
 ### 代码提交说明
 
 [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+
+## Jest测试
+
+Jest 测试框架官方网站[Jest](https://jestjs.io/)
 
 ## 🔭 学习更多
 
