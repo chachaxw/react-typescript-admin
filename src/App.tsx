@@ -5,7 +5,7 @@ import { connect } from 'dva';
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 
-import { Content, Footer, Header, SideBar } from './components';
+import { Content, ErrorBoundary, Footer, Header, SideBar } from './components';
 import { Auth } from './models/global';
 import AppRoutes from './routes';
 import routesConfig from './routes/config';
@@ -57,8 +57,10 @@ class App extends Component<InternalProps, InternalState> {
           <Layout>
             <Header />
             <Content>
-              <AppRoutes app={app} auth={auth}
-                onRouterChange={(title: string) => this.onRouterChange(title)} />
+              <ErrorBoundary>
+                <AppRoutes app={app} auth={auth}
+                  onRouterChange={(title: string) => this.onRouterChange(title)} />
+              </ErrorBoundary>
             </Content>
             <Footer className="Footer" />
           </Layout>

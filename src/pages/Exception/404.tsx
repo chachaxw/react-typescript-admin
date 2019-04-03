@@ -28,7 +28,7 @@ export default class NotFound extends PureComponent<any, InternalState> {
         <div style={styles}>
           <img src={`${process.env.PUBLIC_URL}/images/exception_404.svg`} alt="404" />
           <div style={{marginLeft: 30}}>
-            <img src={`${process.env.PUBLIC_URL}/images/404.png`} alt="404" width="200" />
+            <p style={{fontSize: 72, fontWeight: 'bold', marginBottom: 0}}>404</p>
             <p style={{fontSize: 24, marginTop: 16}}>抱歉，你访问的页面不存在</p>
             <Link to="/app/dashboard">
               <Button type="primary">返回首页</Button>
