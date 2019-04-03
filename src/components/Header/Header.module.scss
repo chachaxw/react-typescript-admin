@@ -90,6 +90,10 @@
   :global(.ant-empty) {
     margin: 100px auto;
   }
+
+  :global(.ant-list-item .ant-list-item-meta) {
+    padding-left: 20px;
+  }
 }
 
 .loadMore {

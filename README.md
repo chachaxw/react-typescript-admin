@@ -119,8 +119,8 @@ TSLint 语法检查，检查Typescript文件是否符合 tslint.json 配置规�
 ### 技术栈
 
 [`React`](https://github.com/facebook/react) [`Create React App`](https://facebook.github.io/create-react-app/docs/getting-started) [`Typescript`](https://github.com/Microsoft/TypeScript) [`React Router`](https://github.com/ReactTraining/react-router) [`Redux`](https://github.com/reduxjs/redux) [`Dva`](https://github.com/dvajs/dva)
- [`Ant Design`](https://github.com/ant-design/ant-design) [`Jest`](https://github.com/facebook/jest) [`ECharts`](https://github.com/apache/incubator-echarts) [`Mock.js`](https://github.com/nuysoft/Mock) [`React Hot Loader`](https://github.com/gaearon/react-hot-loader) [`React Loadable`](https://github.com/jamiebuilds/react-loadable)
- [`Webpack`](https://github.com/webpack/webpack) [`Babel`](https://github.com/babel/babel) [`enzyme`](https://github.com/airbnb/enzyme)
+ [`Ant Design`](https://github.com/ant-design/ant-design) [`Jest`](https://github.com/facebook/jest) [`ECharts`](https://github.com/apache/incubator-echarts) [`faker.js`](https://github.com/Marak/faker.js) [`React Hot Loader`](https://github.com/gaearon/react-hot-loader) [`React Loadable`](https://github.com/jamiebuilds/react-loadable)
+ [`Webpack`](https://github.com/webpack/webpack) [`Babel`](https://github.com/babel/babel) [`enzyme`](https://github.com/airbnb/enzyme) [`json-server`](https://github.com/typicode/json-server)
 
 ### React Typescript编写规范
 
