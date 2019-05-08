@@ -30,10 +30,6 @@ interface InternalProps {
 
 class BaseMenu extends PureComponent<InternalProps> {
 
-  private constructor(props: InternalProps) {
-    super(props);
-  }
-
   public getSelectedMenuKeys(pathname: string) {
     const { flatMenuKeys } = this.props;
     return urlToList(pathname).map((path: string) => getMenuMatches(flatMenuKeys, path).pop()) as string[];

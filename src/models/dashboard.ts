@@ -1,9 +1,3 @@
-import { message } from 'antd';
-import * as dateFns from 'date-fns';
-
-import Dashboard from '../pages/Dashboard/Dashboard';
-import { DashboardService } from '../services/DashboardService';
-
 // Dashboard state interface
 interface Dashboard {
     loading: boolean;

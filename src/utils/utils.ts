@@ -40,7 +40,7 @@ export function getFlatMenuKeys(menu: any[]): string[] {
 export function getMenuMatches(flatMenuKeys: string[], path: string): string[] {
   const menus = flatMenuKeys.filter((item: string) => {
     if (!item) {
-      return;
+      return [];
     }
     return pathToRegexp(item).test(path);
   });

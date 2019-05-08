@@ -15,12 +15,8 @@ interface DvaProps {
 
 class Dashboard extends Component<DvaProps> {
 
-  constructor(props: DvaProps) {
-    super(props);
-  }
-
   public render() {
-    const { loading, summary } = this.props;
+    const { loading } = this.props;
 
     return (
       <div className={styles.dashboard}>

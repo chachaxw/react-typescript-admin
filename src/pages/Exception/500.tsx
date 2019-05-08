@@ -9,10 +9,6 @@ interface InternalState {
 
 export default class ServerError extends PureComponent<any, InternalState> {
 
-  constructor(props: any) {
-    super(props);
-  }
-
   public render() {
     const styles = {
       height: '100%',

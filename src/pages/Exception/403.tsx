@@ -9,10 +9,6 @@ interface InternalState {
 
 export default class NoPermission extends PureComponent<any, InternalState> {
 
-  constructor(props: any) {
-    super(props);
-  }
-
   public render() {
     const styles = {
       height: '100%',

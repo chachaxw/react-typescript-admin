@@ -1,16 +1,6 @@
-import { message } from 'antd';
-
-import { GlobalService } from '../services/GlobalService';
-
 // Global declare
 declare global {
   interface Window { ga: any; }
-}
-
-// Global permissions enum
-enum Permissions {
-  Process = 'PROCESS',
-  Receive = 'RECEIVE',
 }
 
 // Global auth interface

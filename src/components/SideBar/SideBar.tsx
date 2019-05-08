@@ -81,7 +81,11 @@ class SideBar extends PureComponent<InternalProps, InternalState> {
         width={width || 240}
         collapsed={collapsed}
         className={styles.sideBar}
-        onCollapse={() => onCollapse(!collapsed)}
+        onCollapse={() => {
+          if (firstMount) {
+            onCollapse(collapsed);
+          }
+        }}
       >
         <Logo />
         <BaseMenu
