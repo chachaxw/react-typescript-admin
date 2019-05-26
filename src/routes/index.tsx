@@ -1,15 +1,18 @@
 import { Redirect, Route, RouteComponentProps, Switch } from 'dva/router';
 import React, { Component } from 'react';
+import DocumentTitle from 'react-document-title';
 import routesConfig, { RouteConfig } from './config';
 
 import queryString from 'query-string';
 import { Auth } from '../models/global';
 import AllPages from '../pages';
+import NoPermission from '../pages/Exception/403';
+import NotFound from '../pages/Exception/404';
+import ServerError from '../pages/Exception/500';
 
 interface InternalProps {
   app: any;
   auth: Auth;
-  onRouterChange: (title: string) => void;
 }
 
 export default class AppRoutes extends Component<InternalProps> {
@@ -37,7 +40,7 @@ export default class AppRoutes extends Component<InternalProps> {
   }
 
   public render() {
-    const { app, onRouterChange } = this.props;
+    const { app } = this.props;
 
     return (
       <Switch>
@@ -57,6 +60,7 @@ export default class AppRoutes extends Component<InternalProps> {
                     const reg = /\?\S*/g;
                     const queryParams = window.location.hash.match(reg);
                     const { params } = props.match;
+                    const title = `坎德拉智慧物流后台管理系统-${name}`;
 
                     Object.keys(params).forEach((key: string) => {
                       params[key] = params[key] && params[key].replace(reg, '');
@@ -70,11 +74,12 @@ export default class AppRoutes extends Component<InternalProps> {
                       query: queryParams ? queryString.parse(queryParams[0]) : {},
                     };
 
-                    if (onRouterChange) {
-                      onRouterChange && onRouterChange(`React Typescript Admin Starter Template-${name}`);
-                    }
-
-                    return this.requireLogin(<Component {...mergeProps} />, config.auth);
+                    return this.requireLogin(
+                      <DocumentTitle title={title}>
+                        <Component {...mergeProps} />
+                      </DocumentTitle>,
+                      config.auth
+                    );
                   }}
                 />
               );
@@ -84,6 +89,9 @@ export default class AppRoutes extends Component<InternalProps> {
                     config.children && config.children.map((d: RouteConfig) => route(d));
           })
         )}
+        <Route path="/app/exception/403" component={NoPermission} />
+        <Route path="/app/exception/404" component={NotFound} />
+        <Route path="/app/exception/500" component={ServerError} />
         <Route render={() => <Redirect to="/exception/404" />} />
       </Switch>
     );

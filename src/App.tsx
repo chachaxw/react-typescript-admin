@@ -37,14 +37,6 @@ class App extends Component<InternalProps, InternalState> {
     };
   }
 
-  public onRouterChange(title: string) {
-    if (this.state.title === title) {
-      return;
-    }
-
-    this.setState({ title });
-  }
-
   public render() {
     const { title } = this.state;
     const { app, auth, collapsed, location, onCollapse } = this.props;
@@ -58,8 +50,7 @@ class App extends Component<InternalProps, InternalState> {
             <Header />
             <Content>
               <ErrorBoundary>
-                <AppRoutes app={app} auth={auth}
-                  onRouterChange={(title: string) => this.onRouterChange(title)} />
+                <AppRoutes app={app} auth={auth} />
               </ErrorBoundary>
             </Content>
             <Footer className="Footer" />
