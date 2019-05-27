@@ -1,5 +1,7 @@
 export const MobileRxp = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
 
+export const EmailRxp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+
 // API request error code message
 export const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -18,3 +20,15 @@ export const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
+
+export const localStorageKey = {
+  APP_KEY_STORE: 'ADMIN-KEY',
+  USER_KEY_STORE: 'ADMIN-USER',
+  APP_VIEW_STORE: 'ADMIN-VIEW',
+};
+
+export const exceptionRoutes: string[] = [
+  '/app/exception/403',
+  '/app/exception/404',
+  '/app/exception/500',
+];

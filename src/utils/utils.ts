@@ -79,3 +79,11 @@ export function formatSeconds(num: number): string {
 
   return `${hours > 0 ? hours + '小时' : ''}${minutes > 0 ? minutes + '分' : ''}${seconds > 0 ? seconds + '秒' : ''}`;
 }
+
+/**
+ * 判断对象或者数组是否为空
+ * @param obj
+ */
+export function isEmpty(obj: any): boolean {
+  return [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length;
+}

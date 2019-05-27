@@ -41,8 +41,8 @@ export const errorHandle = (error: any, dispatch: any) => {
     }
   } else {
     notification.error({
-      message: `请求错误`,
-      description: '网络不佳！',
+      message: `Request Error`,
+      description: 'Network error, please try again!',
     });
   }
 };
