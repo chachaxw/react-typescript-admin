@@ -60,7 +60,7 @@ export default class AppRoutes extends Component<InternalProps> {
                     const reg = /\?\S*/g;
                     const queryParams = window.location.hash.match(reg);
                     const { params } = props.match;
-                    const title = `坎德拉智慧物流后台管理系统-${name}`;
+                    const title = `React Typescript Admin Starter Template-${name}`;
 
                     Object.keys(params).forEach((key: string) => {
                       params[key] = params[key] && params[key].replace(reg, '');
