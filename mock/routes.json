@@ -1,4 +1,4 @@
 {
-  "/api": "/$1",
+  "/api/auth": "/auth",
   "/api/dashboard/comments": "/dashboard"
 }
