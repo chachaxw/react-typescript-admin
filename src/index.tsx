@@ -18,7 +18,7 @@ const app: any = dva({
     errorHandle(error, app._store.dispatch);
   },
 
-  onAction: logger,
+  onAction: [logger],
 
   // 其他第三方 Reducer 配置
   extraReducers: {

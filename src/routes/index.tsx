@@ -86,13 +86,13 @@ export default class AppRoutes extends Component<InternalProps> {
             };
 
             return config.component ? route(config) :
-                    config.children && config.children.map((d: RouteConfig) => route(d));
+              config.children && config.children.map((d: RouteConfig) => route(d));
           })
         )}
         <Route path="/app/exception/403" component={NoPermission} />
         <Route path="/app/exception/404" component={NotFound} />
         <Route path="/app/exception/500" component={ServerError} />
-        <Route render={() => <Redirect to="/exception/404" />} />
+        <Route render={() => <Redirect to="/app/exception/404" />} />
       </Switch>
     );
   }
