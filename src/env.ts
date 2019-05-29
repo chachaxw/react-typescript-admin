@@ -18,15 +18,15 @@ const serverEnvironments: {
 } = {
   [EnvType.Local]: {
     host: 'http://localhost:3000',
-    api: 'http://localhost:3001',
+    api: 'http://localhost:3031',
   },
   [EnvType.Test]: {
     host: 'http://localhost:3000',
-    api: 'http://localhost:3001',
+    api: 'http://localhost:3031',
   },
   [EnvType.Development]: {
-    host: 'https://chachaxw.github.io',
-    api: 'https://chachaxw.github.io',
+    host: 'http://localhost:3000',
+    api: 'http://localhost:3031',
   },
   [EnvType.Production]: {
     host: 'https://chachaxw.github.io',
