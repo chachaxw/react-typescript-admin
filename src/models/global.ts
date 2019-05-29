@@ -53,7 +53,7 @@ export default {
     *login(action: any, { call, put }: any) {
       try {
         const { payload } = action;
-        const res = yield call(GlobalService.auth, payload);
+        yield call(GlobalService.auth, payload);
         yield put({
           type: 'authorize',
           payload: {
@@ -61,6 +61,7 @@ export default {
             permissions: [],
           },
         });
+        yield put(routerRedux.push('/app'));
       } catch (error) {
         throw error;
       }

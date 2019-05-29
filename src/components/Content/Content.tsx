@@ -6,13 +6,7 @@ interface InternalProps {
 }
 
 export default function Content(props: InternalProps) {
-  const styles = {
-    padding: '0 40px',
-  };
-
   return (
-    <Layout.Content style={styles} >
-      {props.children}
-    </Layout.Content>
+    <Layout.Content>{props.children}</Layout.Content>
   );
 }

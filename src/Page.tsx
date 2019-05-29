@@ -15,6 +15,7 @@ const Page = ({ app }: any) => (
     <HashRouter>
         <Switch>
             <Route exact path="/" render={() => <Redirect to="/app/dashboard" push />} />
+            <Route exact path="/app" render={() => <Redirect to="/app/dashboard" push />} />
             <Route path="/login" component={Login} />
             <Route path="/app" render={(props: any) => <App app={app} {...props} />} />
             <Route path="/exception/403" component={NoPermission} />

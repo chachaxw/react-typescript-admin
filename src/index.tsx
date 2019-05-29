@@ -10,7 +10,12 @@ import { Global } from './models';
 import Page from './Page';
 import { errorHandle } from './utils/errorHandle';
 
-const logger = Env === EnvType.Development ? createLogger() : () => null;
+// Dva middleware
+const middleware = [];
+
+if (Env === EnvType.Development) {
+  middleware.push(createLogger());
+}
 
 const app: any = dva({
   onError(error: any) {
@@ -18,7 +23,7 @@ const app: any = dva({
     errorHandle(error, app._store.dispatch);
   },
 
-  onAction: [logger],
+  onAction: middleware,
 
   // 其他第三方 Reducer 配置
   extraReducers: {

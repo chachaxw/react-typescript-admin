@@ -1,7 +1,7 @@
 import { Avatar, Badge, Dropdown, Icon, Layout, Menu } from 'antd';
 import { connect } from 'dva';
 import Debounce from 'lodash-decorators/debounce';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { UserInfo } from '../../models/global';
 import styles from './Header.module.scss';
@@ -9,13 +9,17 @@ import NoticePane from './NoticePane';
 
 const { ItemGroup } = Menu;
 
-interface InternalProps {
+interface DvaProps {
+  logout: () => void;
+  loadMoreNotices: (params?: any) => void;
+}
+
+interface InternalProps extends DvaProps {
   notices: any[];
   userInfo: UserInfo;
   collapsed: boolean;
   hasMore: boolean;
   fetchingNotices: boolean;
-  loadMoreNotices: (params?: any) => void;
   onCollapse: (collapsed: boolean) => void;
 }
 
@@ -23,7 +27,7 @@ interface InternalState {
   showNoticePane: boolean;
 }
 
-export class Header extends Component<InternalProps, InternalState> {
+export class Header extends PureComponent<InternalProps, InternalState> {
   private isFullScreen = false;
 
   private constructor(props: InternalProps) {
@@ -57,7 +61,7 @@ export class Header extends Component<InternalProps, InternalState> {
   }
 
   public signOut() {
-    // TODO: Need to finish sign out logic
+    this.props.logout();
   }
 
   public onVisibleChange(visible: boolean) {
@@ -138,6 +142,9 @@ const mapDispatchToProps = (dispatch: any) => {
         type: 'global/changeLayoutCollapsed',
         payload: collapsed,
       });
+    },
+    logout: () => {
+      dispatch({type: 'global/logout'});
     },
     loadMoreNotices: (params?: any) => {
       dispatch({
