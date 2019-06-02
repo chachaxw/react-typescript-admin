@@ -39,7 +39,7 @@ export class Login extends PureComponent<InternalProps> {
 
     return (
       <div className={styles.login}>
-        <svg className="Header__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1337.97 684.43">
+        {/* <svg className="Header__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1337.97 684.43">
           <path
             className="Header__shape bigSquare" fill="#16d5d1"
             d="M546.519 349.271l86.383-56.098 56.097 86.383-86.383 56.098z"
@@ -65,40 +65,42 @@ export class Login extends PureComponent<InternalProps> {
             className="Header__shape littleCircle"
             fill="#0f1c70" cx="1036.52" cy="203.17" r="27"
           />
-        </svg>
-        <Form style={{ width: 320 }} onSubmit={this.onSubmit}>
-          <Form.Item>
-            {getFieldDecorator('email', {
-              rules: [
-                { required: true, message: 'Please input email！' },
-                { pattern: EmailRxp, message: 'Please input right email!' },
-              ],
-            })(
-              <Input
-                prefix={<Icon type="inbox" style={{ color }} />}
-                placeholder="Email"
-              />
-            )}
-          </Form.Item>
-          <Form.Item>
-            {getFieldDecorator('password', {
-              rules: [
-                { required: true, message: 'Please input password!' },
-              ],
-            })(
-              <Input
-                type="password"
-                prefix={<Icon type="key" style={{ color }} />}
-                placeholder="Password"
-              />
-            )}
-          </Form.Item>
-          <Form.Item>
-            <Button block type="primary" htmlType="submit" loading={loading}>
-              登录
-            </Button>
-          </Form.Item>
-        </Form>
+        </svg> */}
+        <div className={styles.container}>
+          <Form onSubmit={this.onSubmit}>
+            <Form.Item>
+              {getFieldDecorator('email', {
+                rules: [
+                  { required: true, message: 'Please input email！' },
+                  { pattern: EmailRxp, message: 'Please input right email!' },
+                ],
+              })(
+                <Input
+                  prefix={<Icon type="inbox" style={{ color }} />}
+                  placeholder="Email"
+                />
+              )}
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('password', {
+                rules: [
+                  { required: true, message: 'Please input password!' },
+                ],
+              })(
+                <Input
+                  type="password"
+                  prefix={<Icon type="key" style={{ color }} />}
+                  placeholder="Password"
+                />
+              )}
+            </Form.Item>
+            <Form.Item>
+              <Button block type="primary" htmlType="submit" loading={loading}>
+                登录
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
     );
   }

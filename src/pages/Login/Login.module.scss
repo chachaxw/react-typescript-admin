@@ -5,8 +5,35 @@
   height: 100%;
   font-size: 72px;
   overflow: hidden;
-  background-color: #ffffff;
-  // background-image: url('/images/background.svg');
+  background-color: #f8f8f8;
+}
+
+.container {
+  width: 380px;
+  padding: 40px;
+  border-radius: 2px;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow: hidden;
+  perspective: 2000px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .08);
+}
+
+.loginForm {
+  padding-top: 40px;
+  text-align: left;
+
+  :global(.ant-input) {
+    border-radius: 20px;
+  }
+
+  :global(.ant-input:focus) {
+    box-shadow: none;
+  }
+
+  :global(.ant-btn) {
+    font-size: 16px;
+  }
 }
 
 .Header__svg {
@@ -70,7 +97,7 @@
 // some lovely sass fun to stagger the animation
 
 @for $i from 1 to 12 {
-  .Header__shape:nth-child(#{$i}) { 
+  .Header__shape:nth-child(#{$i}) {
     animation-delay: $i * 0.16s;
   }
 }
