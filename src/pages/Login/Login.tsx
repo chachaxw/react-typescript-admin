@@ -67,7 +67,7 @@ export class Login extends PureComponent<InternalProps> {
           />
         </svg> */}
         <div className={styles.container}>
-          <Form onSubmit={this.onSubmit}>
+          <Form className={styles.loginForm} onSubmit={this.onSubmit}>
             <Form.Item>
               {getFieldDecorator('email', {
                 rules: [
@@ -76,6 +76,7 @@ export class Login extends PureComponent<InternalProps> {
                 ],
               })(
                 <Input
+                  size="large"
                   prefix={<Icon type="inbox" style={{ color }} />}
                   placeholder="Email"
                 />
@@ -88,6 +89,7 @@ export class Login extends PureComponent<InternalProps> {
                 ],
               })(
                 <Input
+                  size="large"
                   type="password"
                   prefix={<Icon type="key" style={{ color }} />}
                   placeholder="Password"
@@ -95,7 +97,7 @@ export class Login extends PureComponent<InternalProps> {
               )}
             </Form.Item>
             <Form.Item>
-              <Button block type="primary" htmlType="submit" loading={loading}>
+              <Button size="large" block type="primary" htmlType="submit" loading={loading} shape="round">
                 登录
               </Button>
             </Form.Item>
