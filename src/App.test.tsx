@@ -11,23 +11,23 @@ let app: any;
 let wrapper: any;
 
 beforeAll(() => {
-    app = dva();
-    app.model(Global);
-    app.router(() => ({}));
-    app.start();
-    wrapper = shallow(
-        <StaticRouter context={{}}>
-            <App store={app._store} location={{pathname: '/app/dashboard'}} />
-        </StaticRouter>
-    );
+  app = dva();
+  app.model(Global);
+  app.router(() => ({}));
+  app.start();
+  wrapper = shallow(
+      <StaticRouter context={{}}>
+          <App store={app._store} location={{pathname: '/app/dashboard'}} />
+      </StaticRouter>
+  );
 });
 
 afterAll(() => {
-    wrapper.unmount();
+  wrapper.unmount();
 });
 
 describe('App Test', () => {
-    it('Capturing Snapshot of APP', () => {
-        expect(toJson(wrapper)).toMatchSnapshot();
-    });
+  it('Capturing Snapshot of APP', () => {
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 });
