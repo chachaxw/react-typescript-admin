@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { HashRouter, Redirect, Route, Switch } from 'dva/router';
+import { BrowserRouter, Redirect, Route, Switch } from 'dva/router';
 import { Env, EnvType } from './env';
 
 import { hot } from 'react-hot-loader';
@@ -12,7 +12,7 @@ import Login from './pages/Login/Login';
 
 // Global pages router
 const Page = ({ app }: any) => (
-  <HashRouter>
+  <BrowserRouter>
     <Switch>
       <Route exact path="/" render={() => <Redirect to="/app/dashboard" push />} />
       <Route exact path="/app" render={() => <Redirect to="/app/dashboard" push />} />
@@ -23,7 +23,7 @@ const Page = ({ app }: any) => (
       <Route path="/exception/500" component={ServerError} />
       <Redirect to="/exception/404" />
     </Switch>
-  </HashRouter>
+  </BrowserRouter>
 );
 
 export default Env === EnvType.Development ? hot(module)(Page) : Page;

@@ -25,7 +25,6 @@ interface InternalProps {
   mode?: 'inline' | 'vertical' | 'horizontal';
   openKeys: string[];
   onOpenChange: (openKeys: string[]) => void;
-  handleOpenChange: (openKeys: string[]) => void;
 }
 
 class BaseMenu extends PureComponent<InternalProps> {
@@ -76,7 +75,7 @@ class BaseMenu extends PureComponent<InternalProps> {
 
   public render() {
     const { className, collapsed, theme, openKeys, mode,
-      style, menu, handleOpenChange, location } = this.props;
+      style, menu, onOpenChange, location } = this.props;
 
     let selectedKeys = this.getSelectedMenuKeys(location.pathname);
     if (!selectedKeys.length && openKeys) {
@@ -99,7 +98,7 @@ class BaseMenu extends PureComponent<InternalProps> {
         mode={mode || 'inline'}
         inlineCollapsed={true}
         selectedKeys={selectedKeys}
-        onOpenChange={handleOpenChange}
+        onOpenChange={onOpenChange}
         {...props}
       >
         {menu && menu.length && menu.map((item: MenuItemProps) => (

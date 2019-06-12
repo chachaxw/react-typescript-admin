@@ -35,7 +35,7 @@ export default {
 
   state: { // 应用的状态数据
     auth: {
-      isAuthenticated: false,
+      isAuthenticated: true,
       permissions: [],
     },
     userInfo: {
