@@ -95,6 +95,7 @@ class SideBar extends PureComponent<InternalProps, InternalState> {
           flatMenuKeys={flatMenuKeys}
           menu={menu} location={location}
           onOpenChange={this.handleOpenChange}
+          handleOpenChange={this.handleOpenChange}
         />
       </Sider>
     );

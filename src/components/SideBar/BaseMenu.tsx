@@ -1,5 +1,5 @@
 import { Icon, Menu } from 'antd';
-import React, { PureComponent } from 'react';
+import React, { FC, PureComponent } from 'react';
 import { getMenuMatches, urlToList } from '../../utils/utils';
 
 import { Link } from 'dva/router';
@@ -14,6 +14,51 @@ export interface MenuItemProps {
   hideInMenu?: boolean;
 }
 
+const MenuItem: FC<MenuItemProps> = (props) => {
+  const { path, icon, name, hideInMenu, ...restProps } = props;
+
+  if (hideInMenu) {
+    return null;
+  }
+
+  return (
+    <Item key={path} {...restProps}>
+      <Link to={path}>
+        {icon && <Icon type={icon} />}
+        <span>{name}</span>
+      </Link>
+    </Item>
+  );
+};
+
+const SubMenuGroup: FC<MenuItemProps> = (props) => {
+  const { name, icon, path, hideInMenu, children, ...restProps } = props;
+
+  if (hideInMenu) {
+    return null;
+  }
+
+  return (
+    <SubMenu
+      key={path}
+      {...restProps}
+      title={
+        icon ? (
+          <span>
+            <Icon type={icon} />
+            <span>{name}</span>
+          </span>
+        ) : name
+      }
+    >
+      {children && children.length ? children.map((item: MenuItemProps) => {
+        return item.children ? <SubMenuGroup key={item.path} {...item} /> :
+          <MenuItem key={item.path} {...item} />;
+      }) : null}
+    </SubMenu>
+  );
+};
+
 interface InternalProps {
   location: Location;
   menu: MenuItemProps[];
@@ -25,57 +70,23 @@ interface InternalProps {
   mode?: 'inline' | 'vertical' | 'horizontal';
   openKeys: string[];
   onOpenChange: (openKeys: string[]) => void;
+  handleOpenChange: (openKeys: string[]) => void;
 }
 
 class BaseMenu extends PureComponent<InternalProps> {
+
+  private constructor(props: InternalProps) {
+    super(props);
+  }
 
   public getSelectedMenuKeys(pathname: string) {
     const { flatMenuKeys } = this.props;
     return urlToList(pathname).map((path: string) => getMenuMatches(flatMenuKeys, path).pop()) as string[];
   }
 
-  public renderMenuItem(item: MenuItemProps) {
-    const { path, icon, name, hideInMenu } = item;
-
-    if (hideInMenu) {
-      return;
-    }
-
-    return (
-      <Item key={path}>
-        <Link to={path}>
-          {icon && <Icon type={icon} />}
-          <span>{name}</span>
-        </Link>
-      </Item>
-    );
-  }
-
-  public renderSubMenu(props: MenuItemProps) {
-    const { name, icon, path, children } = props;
-
-    return (
-      <SubMenu
-        key={path}
-        title={
-          icon ? (
-            <span>
-              <Icon type={icon} />
-              <span>{name}</span>
-            </span>
-          ) : name
-        }
-      >
-        {children && children.length ? children.map(
-          (item: MenuItemProps) => this.renderMenuItem(item)
-        ) : null}
-      </SubMenu>
-    );
-  }
-
   public render() {
     const { className, collapsed, theme, openKeys, mode,
-      style, menu, onOpenChange, location } = this.props;
+      style, menu, handleOpenChange, location } = this.props;
 
     let selectedKeys = this.getSelectedMenuKeys(location.pathname);
     if (!selectedKeys.length && openKeys) {
@@ -96,13 +107,12 @@ class BaseMenu extends PureComponent<InternalProps> {
         className={className}
         theme={theme || 'dark'}
         mode={mode || 'inline'}
-        inlineCollapsed={true}
         selectedKeys={selectedKeys}
-        onOpenChange={onOpenChange}
+        onOpenChange={handleOpenChange}
         {...props}
       >
-        {menu && menu.length && menu.map((item: MenuItemProps) => (
-          item.children ? this.renderSubMenu(item) : this.renderMenuItem(item)
+        {menu && menu.length && menu.map((item: MenuItemProps, index: number) => (
+          item.children ? <SubMenuGroup key={index} {...item} /> : <MenuItem key={index} {...item} />
         ))}
       </Menu>
     );
