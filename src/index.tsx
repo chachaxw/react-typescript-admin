@@ -1,7 +1,6 @@
 import dva from 'dva';
 import createLoading from 'dva-loading';
 import * as React from 'react';
-import { reducer as formReducer } from 'redux-form';
 import { createLogger } from 'redux-logger';
 
 import { Env, EnvType } from './env';
@@ -25,10 +24,6 @@ const app: any = dva({
 
   onAction: middleware,
 
-  // 其他第三方 Reducer 配置
-  extraReducers: {
-    form: formReducer,
-  },
 });
 
 // 第三方插件

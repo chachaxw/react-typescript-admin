@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@storybook/addon-knobs": "^5.1.9",
     "@types/classnames": "^2.2.8",
     "@types/dva": "^1.1.0",
     "@types/enzyme": "^3.9.4",
@@ -16,8 +17,9 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-infinite-scroller": "^1.2.1",
     "@types/react-loadable": "^5.5.1",
-    "@types/redux-form": "^8.1.4",
     "@types/redux-logger": "^3.0.7",
+    "@types/storybook__addon-knobs": "^5.0.2",
+    "@types/storybook__react": "^4.0.2",
     "antd": "^3.19.8",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
@@ -55,7 +57,7 @@
     "staging": "cross-env REACT_APP_BUILD=staging react-app-rewired start",
     "test": "react-app-rewired test",
     "jest": "CI=true react-app-rewired test",
-    "tslint": "tslint --fix 'src/**/*.ts*'",
+    "tslint": "tslint --fix 'src/**/*.(ts|tsx)'",
     "mock": "json-server mock/db.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
@@ -66,7 +68,7 @@
     }
   },
   "lint-staged": {
-    "*.ts*": [
+    "*.(ts|tsx)": [
       "npm run check"
     ]
   },
@@ -81,6 +83,7 @@
   ],
   "devDependencies": {
     "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-info": "^5.1.9",
     "@storybook/addon-links": "^5.1.9",
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",

@@ -16,9 +16,9 @@ beforeAll(() => {
   app.router(() => ({}));
   app.start();
   wrapper = shallow(
-      <StaticRouter context={{}}>
-          <App store={app._store} location={{pathname: '/app/dashboard'}} />
-      </StaticRouter>
+    <StaticRouter context={{}}>
+      <App store={app._store} location={{pathname: '/app/dashboard'}} />
+    </StaticRouter>
   );
 });
 
