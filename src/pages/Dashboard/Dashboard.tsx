@@ -1,4 +1,4 @@
-import { Card, Col, Icon, Row, Skeleton, Statistic } from 'antd';
+import { Card, Col, Icon, Row, Skeleton, Statistic, Upload } from 'antd';
 import { connect } from 'dva';
 import React, { Component } from 'react';
 
@@ -68,6 +68,9 @@ class Dashboard extends Component<DvaProps> {
               </Card>
             </Skeleton>
           </Col>
+        </Row>
+        <Row style={{marginTop: 16}}>
+          <Upload.Dragger>This is Dragger component test</Upload.Dragger>
         </Row>
       </div>
     );
