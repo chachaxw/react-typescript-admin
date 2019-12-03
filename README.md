@@ -2,6 +2,10 @@
 
 该项目由 [Create React App](https://github.com/facebook/create-react-app) 提供技术支持
 
+![Github issues](https://img.shields.io/github/issues/chachaxw/react-typescript-admin)
+![Github forks](https://img.shields.io/github/forks/chachaxw/react-typescript-admin)
+![Github stars](https://img.shields.io/github/stars/chachaxw/react-typescript-admin)
+
 ## 🔨 运行环境
 
 * node >= 8.9.0
