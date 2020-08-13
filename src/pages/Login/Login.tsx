@@ -1,45 +1,23 @@
-import { Button, Form, Icon, Input } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { Icon } from '@ant-design/compatible';
+import { Button, Form, Input } from 'antd';
 import { connect } from 'dva';
-import React, { PureComponent } from 'react';
+import React, { FC } from 'react';
 import { EmailRxp } from '../../utils/constant';
 import styles from './Login.module.scss';
 
-interface FormProps extends FormComponentProps {
-  email: string;
-  password: string;
-}
-
-interface DvaProps {
+interface Props {
   loading: boolean;
   login: (params: any) => void;
 }
 
-interface InternalProps extends DvaProps {
-  form: any;
-}
+export const Login: FC<Props> = (props) => {
+  const color = 'rgba(0,0,0,.25)';
+  const { loading, login } = props;
+  const [form] = Form.useForm();
 
-export class Login extends PureComponent<InternalProps> {
-
-  public onSubmit = () => {
-    const { login, form } = this.props;
-    const { validateFields } = form;
-
-    validateFields((err: any, values: any) => {
-      if (!err) {
-        login(values);
-      }
-    });
-  }
-
-  public render() {
-    const color = 'rgba(0,0,0,.25)';
-    const { form, loading } = this.props;
-    const { getFieldDecorator } = form;
-
-    return (
-      <div className={styles.login}>
-        {/* <svg className="Header__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1337.97 684.43">
+  return (
+    <div className={styles.login}>
+      {/* <svg className="Header__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1337.97 684.43">
           <path
             className="Header__shape bigSquare" fill="#16d5d1"
             d="M546.519 349.271l86.383-56.098 56.097 86.383-86.383 56.098z"
@@ -66,49 +44,30 @@ export class Login extends PureComponent<InternalProps> {
             fill="#0f1c70" cx="1036.52" cy="203.17" r="27"
           />
         </svg> */}
-        <div className={styles.container}>
-          <Form className={styles.loginForm} onSubmit={this.onSubmit}>
-            <Form.Item>
-              {getFieldDecorator('email', {
-                rules: [
-                  { required: true, message: 'Please input email！' },
-                  { pattern: EmailRxp, message: 'Please input right email!' },
-                ],
-              })(
-                <Input
-                  size="large"
-                  prefix={<Icon type="inbox" style={{ color }} />}
-                  placeholder="Email"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [
-                  { required: true, message: 'Please input password!' },
-                ],
-              })(
-                <Input
-                  size="large"
-                  type="password"
-                  prefix={<Icon type="key" style={{ color }} />}
-                  placeholder="Password"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              <Button size="large" block type="primary" htmlType="submit" loading={loading} shape="round">
-                登录
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
+      <div className={styles.container}>
+        <Form className={styles.loginForm} form={form} onFinish={login}>
+          <Form.Item
+            name="email"
+            rules={[
+              { required: true, message: 'Please input email！' },
+              { pattern: EmailRxp, message: 'Please input right email!' },
+            ]}
+          >
+            <Input size="large" prefix={<Icon type="inbox" style={{ color }} />} placeholder="Email" />
+          </Form.Item>
+          <Form.Item name="password" rules={[{ required: true, message: 'Please input password!' }]}>
+            <Input size="large" type="password" prefix={<Icon type="key" style={{ color }} />} placeholder="Password" />
+          </Form.Item>
+          <Form.Item>
+            <Button size="large" block type="primary" htmlType="submit" loading={loading} shape="round">
+              登录
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
-    );
-  }
-}
-
-const CreateLogin = Form.create<FormProps>()(Login);
+    </div>
+  );
+};
 
 const mapStateToProps = ({ global, loading }: any) => {
   return {
@@ -119,12 +78,9 @@ const mapStateToProps = ({ global, loading }: any) => {
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {
   return {
     login: (params: object) => {
-      dispatch({
-        type: 'global/login',
-        payload: params,
-      });
+      dispatch({ type: 'global/login', payload: params });
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

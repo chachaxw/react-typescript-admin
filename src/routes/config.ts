@@ -5,11 +5,11 @@ export interface RouteConfig {
   auth?: string;
   query?: string;
   hideInMenu?: boolean;
-  component: string;
+  component?: string;
   children?: RouteConfig[];
 }
 
-export default {
+export const appRoutes: { [key: string]: RouteConfig[] } = {
   app: [
     {
       name: '控制台',

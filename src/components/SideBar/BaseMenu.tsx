@@ -1,8 +1,9 @@
-import { Icon, Menu } from 'antd';
-import React, { PureComponent } from 'react';
-import { getMenuMatches, urlToList } from '../../utils/utils';
-
+import { Icon } from '@ant-design/compatible';
+import { Menu } from 'antd';
 import { Link } from 'dva/router';
+import React, { PureComponent } from 'react';
+
+import { getMenuMatches, urlToList } from '../../utils/utils';
 
 const { SubMenu, Item } = Menu;
 
@@ -19,16 +20,14 @@ interface InternalProps {
   menu: MenuItemProps[];
   collapsed: boolean;
   className?: string;
+  openKeys: string[];
   flatMenuKeys: string[];
   theme?: 'dark' | 'light';
   mode?: 'inline' | 'vertical' | 'horizontal';
-  openKeys: string[];
-  onOpenChange: (openKeys: string[]) => void;
-  handleOpenChange: (openKeys: string[]) => void;
+  onOpenChange: any;
 }
 
 class BaseMenu extends PureComponent<InternalProps> {
-
   private constructor(props: InternalProps) {
     super(props);
   }
@@ -67,19 +66,22 @@ class BaseMenu extends PureComponent<InternalProps> {
               <Icon type={icon} />
               <span>{name}</span>
             </span>
-          ) : name
+          ) : (
+            name
+          )
         }
       >
-        {children && children.length ? children.map((item: MenuItemProps) =>
-          item.children ? this.renderSubMenu(item) : this.renderMenuItem(item))
+        {children && children.length
+          ? children.map((item: MenuItemProps) =>
+              item.children ? this.renderSubMenu(item) : this.renderMenuItem(item)
+            )
           : null}
       </SubMenu>
     );
   }
 
   public render() {
-    const { className, collapsed, theme, openKeys, mode,
-      menu, handleOpenChange, location } = this.props;
+    const { className, collapsed, theme, openKeys, mode, menu, onOpenChange, location } = this.props;
 
     let selectedKeys = this.getSelectedMenuKeys(location.pathname);
     if (!selectedKeys.length && openKeys) {
@@ -101,12 +103,14 @@ class BaseMenu extends PureComponent<InternalProps> {
         mode={mode || 'inline'}
         selectedKeys={selectedKeys}
         forceSubMenuRender={true}
-        onOpenChange={handleOpenChange}
+        onOpenChange={onOpenChange}
         {...props}
       >
-        {menu && menu.length && menu.map((item: MenuItemProps, index: number) => (
-          item.children ? this.renderSubMenu(item) : this.renderMenuItem(item)
-        ))}
+        {menu &&
+          menu.length &&
+          menu.map((item: MenuItemProps, index: number) =>
+            item.children ? this.renderSubMenu(item) : this.renderMenuItem(item)
+          )}
       </Menu>
     );
   }

@@ -1,4 +1,5 @@
-import { Col, Icon, Row, Typography } from 'antd';
+import { WarningOutlined } from '@ant-design/icons';
+import { Col, Row, Typography } from 'antd';
 import React, { Component, ReactNode } from 'react';
 
 const { Title } = Typography;
@@ -41,7 +42,7 @@ export default class ErrorBoundary extends Component<InternalProps, InternalStat
         <Row style={{marginTop: 50}}>
           <Col>
             <Title level={3} mark type="danger">
-              <Icon type="warning" />出错了！
+              <WarningOutlined />出错了！
             </Title>
           </Col>
           <Col>

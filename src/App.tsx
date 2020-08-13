@@ -1,16 +1,16 @@
-import './App.css';
-
 import { Layout } from 'antd';
 import { connect } from 'dva';
 import React, { FC } from 'react';
 
-import { Content, ErrorBoundary, Footer, Header, SideBar } from './components';
+import { BreadCrumbs, Content, ErrorBoundary, Footer, Header, SideBar } from './components';
 import { Auth } from './models/global';
-import AppRoutes from './routes';
-import routesConfig from './routes/config';
+import { AppRoutes } from './routes';
+import { appRoutes } from './routes/config';
 import { getFlatMenuKeys } from './utils/utils';
 
-const menu = routesConfig.app;
+import './App.css';
+
+const menu = appRoutes.app;
 const flatMenuKeys = getFlatMenuKeys(menu);
 
 interface DvaProps {
@@ -29,13 +29,19 @@ const App: FC<Props> = (props: Props) => {
 
   return (
     <Layout className="App">
-      <SideBar collapsed={collapsed} menu={menu} onCollapse={onCollapse}
-        flatMenuKeys={flatMenuKeys} location={location} />
+      <SideBar
+        menu={menu}
+        location={location}
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        flatMenuKeys={flatMenuKeys}
+      />
       <Layout>
         <Header />
         <Content>
+          <BreadCrumbs menu={menu} url={location.pathname} />
           <ErrorBoundary>
-            <AppRoutes app={app} auth={auth} />
+            <AppRoutes menu={menu} app={app} auth={auth} />
           </ErrorBoundary>
         </Content>
         <Footer className="Footer" />

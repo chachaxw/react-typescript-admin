@@ -3,6 +3,8 @@ import qs from 'qs';
 
 import { ServerEnv } from '../env';
 
+const env = ServerEnv();
+
 export interface Pagination {
   page: number;
   pageSize: number;
@@ -17,10 +19,10 @@ interface CustomizeConfig extends AxiosRequestConfig {
 
 // axios config options
 const options: CustomizeConfig = {
-  baseURL: ServerEnv.api + '/api',
-  timeout: 10000,
   retry: 1,
+  timeout: 10000,
   retryDelay: 1000,
+  baseURL: env.api + '/api',
   // 查询对象序列化函数
   paramsSerializer: (params: any) => qs.stringify(params),
 };
@@ -49,9 +51,11 @@ AxiosInstance.interceptors.response.use(undefined, (err) => {
 // GET 获取数据
 export const GET = (url: string, params?: any, config?: AxiosRequestConfig) => {
   return new Promise((resolve, reject) => {
-    AxiosInstance.get(url, { params, ...config }).then((res: AxiosResponse) => {
-      resolve(res);
-    }).catch((error: any) => reject(error));
+    AxiosInstance.get(url, { params, ...config })
+      .then((res: AxiosResponse) => {
+        resolve(res);
+      })
+      .catch((error: any) => reject(error));
   });
 };
 

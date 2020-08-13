@@ -25,7 +25,6 @@ interface InternalState {
 }
 
 class SideBar extends PureComponent<InternalProps, InternalState> {
-
   private constructor(props: InternalProps) {
     super(props);
 
@@ -66,10 +65,7 @@ class SideBar extends PureComponent<InternalProps, InternalState> {
   }
 
   public handleOpenChange(openKeys: string[]) {
-    const isMulti = openKeys.filter((openKey: string) => this.isMainMenu(openKey)).length > 1;
-    this.setState({
-      openKeys: isMulti ? [openKeys.pop()] as string[] : [...openKeys],
-    });
+    this.setState({ openKeys });
   }
 
   public render() {
@@ -82,20 +78,20 @@ class SideBar extends PureComponent<InternalProps, InternalState> {
         collapsed={collapsed}
         className={styles.sideBar}
         onCollapse={() => {
-          if (firstMount) {
-            onCollapse(collapsed);
+          if (!firstMount) {
+            onCollapse(!collapsed);
           }
         }}
       >
         <Logo />
         <BaseMenu
+          menu={menu}
           openKeys={openKeys}
+          location={location}
           collapsed={collapsed}
           className={styles.baseMenu}
           flatMenuKeys={flatMenuKeys}
-          menu={menu} location={location}
           onOpenChange={this.handleOpenChange}
-          handleOpenChange={this.handleOpenChange}
         />
       </Sider>
     );
