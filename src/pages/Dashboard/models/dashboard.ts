@@ -1,8 +1,4 @@
-// Dashboard state interface
-interface DashboardState {
-  loading: boolean;
-}
-
+// Dashboard state
 export default {
   namespace: 'dashboard', // model的命名空间
 

@@ -38,13 +38,15 @@ AxiosInstance.interceptors.response.use(undefined, (err) => {
   }
 
   config.__retryCount = config.__retryCount || 0;
+
   if (config.__retryCount >= config.retry) {
     return Promise.reject(err);
   }
 
   config.__retryCount += 1;
+
   return new Promise((resolve) => {
-    setTimeout(() => resolve(), config.retryDelay);
+    setTimeout(() => resolve(null), config.retryDelay);
   }).then(() => axios(config));
 });
 
