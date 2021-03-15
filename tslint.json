@@ -1,7 +1,8 @@
 {
   "extends": [
     "tslint:recommended",
-    "tslint-react"
+    "tslint-react",
+    "tslint-react-hooks"
   ],
   "rulesDirectory": [
     "node_modules/tslint-lines-between-class-members"
@@ -34,6 +35,7 @@
     "no-empty-interface": true,
     "no-unnecessary-initializer": true,
     "no-conditional-assignment": true,
+    "react-hooks-nesting": "error",
     "array-type": [
       true,
       "array"
@@ -46,7 +48,7 @@
       false,
       "allow-empty-catch"
     ],
-    "no-trailing-whitespace": [// 不允许空格结尾
+    "no-trailing-whitespace": [
       true,
       "ignore-comments",
       "ignore-jsdoc"

@@ -1,6 +1,7 @@
 import Loadable from 'react-loadable';
 
 import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Loading from './Loading/Loading';
@@ -11,4 +12,4 @@ const Content = Loadable({
     loading: Loading,
 });
 
-export { BreadCrumbs, Content, Footer, Header, Loading, SideBar };
+export { BreadCrumbs, Content, ErrorBoundary, Footer, Header, Loading, SideBar };

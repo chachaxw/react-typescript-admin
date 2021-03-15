@@ -1,15 +1,17 @@
-import './App.css';
-
 import { Layout } from 'antd';
 import { connect } from 'dva';
-import React, { Component } from 'react';
-import DocumentTitle from 'react-document-title';
+import React, { FC } from 'react';
 
-import { Content, Footer, Header, SideBar } from './components';
+import { BreadCrumbs, Content, ErrorBoundary, Footer, Header, SideBar } from './components';
 import { Auth } from './models/global';
-import AppRoutes from './routes';
-import routesConfig from './routes/config';
+import { AppRoutes } from './routes';
+import { appRoutes } from './routes/config';
 import { getFlatMenuKeys } from './utils/utils';
+
+import './App.css';
+
+const menu = appRoutes.app;
+const flatMenuKeys = getFlatMenuKeys(menu);
 
 interface DvaProps {
   auth: Auth;
@@ -18,55 +20,35 @@ interface DvaProps {
   onCollapse: (collapsed: boolean) => void;
 }
 
-interface InternalProps extends DvaProps {
+interface Props extends DvaProps {
   app: any;
 }
 
-interface InternalState {
-  title: string;
-}
+const App: FC<Props> = (props: Props) => {
+  const { app, auth, collapsed, location, onCollapse } = props;
 
-class App extends Component<InternalProps, InternalState> {
-  private menu = routesConfig.app;
-  private flatMenuKeys = getFlatMenuKeys(this.menu);
-
-  private constructor(props: InternalProps) {
-    super(props);
-    this.state = {
-      title: '',
-    };
-  }
-
-  public onRouterChange(title: string) {
-    if (this.state.title === title) {
-      return;
-    }
-
-    this.setState({ title });
-  }
-
-  public render() {
-    const { title } = this.state;
-    const { app, auth, collapsed, location, onCollapse } = this.props;
-
-    return (
-      <DocumentTitle title={title}>
-        <Layout className="App">
-          <SideBar collapsed={collapsed} menu={this.menu} onCollapse={onCollapse}
-            flatMenuKeys={this.flatMenuKeys} location={location} />
-          <Layout>
-            <Header />
-            <Content>
-              <AppRoutes app={app} auth={auth}
-                onRouterChange={(title: string) => this.onRouterChange(title)} />
-            </Content>
-            <Footer className="Footer" />
-          </Layout>
-        </Layout>
-      </DocumentTitle>
-    );
-  }
-}
+  return (
+    <Layout className="App">
+      <SideBar
+        menu={menu}
+        location={location}
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        flatMenuKeys={flatMenuKeys}
+      />
+      <Layout>
+        <Header />
+        <Content>
+          <BreadCrumbs menu={menu} url={location.pathname} />
+          <ErrorBoundary>
+            <AppRoutes menu={menu} app={app} auth={auth} />
+          </ErrorBoundary>
+        </Content>
+        <Footer className="Footer" />
+      </Layout>
+    </Layout>
+  );
+};
 
 const mapStateToProps = ({ global }: any) => {
   return {

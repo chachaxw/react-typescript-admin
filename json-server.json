@@ -1,0 +1,6 @@
+{
+  "port": "3031",
+  "watch": true,
+  "delay": "2000",
+  "routes": "mock/routes.json"
+}

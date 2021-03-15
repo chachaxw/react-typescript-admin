@@ -1,0 +1,4 @@
+{
+  "/api/auth": "/auth",
+  "/api/dashboard/comments": "/dashboard"
+}

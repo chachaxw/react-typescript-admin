@@ -1,4 +1,6 @@
-import pathToRegexp from 'path-to-regexp';
+import { pathToRegexp } from 'path-to-regexp';
+
+import { RouteConfig } from '../routes';
 
 /**
  * Transfer url to url list
@@ -40,7 +42,7 @@ export function getFlatMenuKeys(menu: any[]): string[] {
 export function getMenuMatches(flatMenuKeys: string[], path: string): string[] {
   const menus = flatMenuKeys.filter((item: string) => {
     if (!item) {
-      return;
+      return [];
     }
     return pathToRegexp(item).test(path);
   });
@@ -64,6 +66,27 @@ export function getDefaultCollapsedSubMenus(pathname: string, flatMenuKeys: stri
 }
 
 /**
+ * 获取面包屑路径映射
+ * @param RouteConfig[] menuData 菜单配置
+ */
+export function getBreadcrumbNameMap(menuData: RouteConfig[]): { [key: string]: RouteConfig } {
+  const routerMap: { [key: string]: RouteConfig } = {};
+  const flattenMenuData: (data: RouteConfig[]) => void = (data) => {
+    data.forEach((menuItem: RouteConfig) => {
+      if (!menuItem) {
+        return;
+      }
+      if (menuItem && menuItem.children) {
+        flattenMenuData(menuItem.children);
+      }
+      routerMap[menuItem.path] = menuItem;
+    });
+  };
+  flattenMenuData(menuData);
+  return routerMap;
+}
+
+/**
  * Transfer number to `x小时 y分 z秒`
  * @param {number} num
  * @return {string}
@@ -78,4 +101,12 @@ export function formatSeconds(num: number): string {
   const seconds = ~~(num % 60);
 
   return `${hours > 0 ? hours + '小时' : ''}${minutes > 0 ? minutes + '分' : ''}${seconds > 0 ? seconds + '秒' : ''}`;
+}
+
+/**
+ * 判断对象或者数组是否为空
+ * @param {array | object} obj
+ */
+export function isEmpty(obj: any): boolean {
+  return [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
 }

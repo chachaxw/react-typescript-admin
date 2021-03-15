@@ -1,23 +1,26 @@
 import * as React from 'react';
 import Loadable from 'react-loadable';
 
-import { Loading } from '../components';
-import { registerModel } from '../models';
+import { Loading } from '../../components';
+import { registerModel } from '../../models';
 
 const Dashboard = Loadable.Map({
   loader: {
-    Dashboard: () => import('./Dashboard/Dashboard'),
-    model: () => import('../models/dashboard'),
+    Dashboard: () => import('./Dashboard'),
+    model: () => import('./models/dashboard'),
   },
   loading: Loading,
   render(loaded: any, props: any) {
     const Dashboard = loaded.Dashboard.default;
     const model = loaded.model.default;
     registerModel(props.app, model);
-    return <Dashboard {...props} />;
+
+    return (
+      <Loading>
+        <Dashboard {...props} />
+      </Loading>
+    );
   },
 });
 
-export default {
-  Dashboard,
-};
+export { Dashboard };

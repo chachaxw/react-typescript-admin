@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadCrumbs test should display a breadcrumbs 1`] = `
+<Breadcrumb
+  style={
+    Object {
+      "margin": "12px 16px",
+    }
+  }
+>
+  <BreadcrumbItem
+    key="/app/dashboard"
+  >
+    <DefaultItem
+      component="Dashboard"
+      name="控制台"
+      path="/app/dashboard"
+    />
+  </BreadcrumbItem>
+</Breadcrumb>
+`;
+
+exports[`DefaultItem test should display a link when with prop component 1`] = `
+<Router
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <DefaultItem
+    component="Test"
+    name="Dashboard"
+    path="/app/dashboard"
+  />
+</Router>
+`;
+
+exports[`DefaultItem test should display a text when without prop component 1`] = `
+<Text>
+  Dashboard
+</Text>
+`;

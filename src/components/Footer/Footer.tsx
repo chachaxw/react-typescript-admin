@@ -1,13 +1,13 @@
-import { Icon, Layout } from 'antd';
-import React from 'react';
+import { Layout } from 'antd';
+import { getYear } from 'date-fns';
+import React, { FunctionComponent } from 'react';
 
-export default function Footer(props: any) {
-    return (
-        <Layout.Footer {...props}>
-            Copyright ©2019 Created by Chacha
-            <a href="https://github.com/chachaxw/react-typescript-admin" target="_blank" style={{margin: '0 10px'}}>
-              <Icon type="github" />
-            </a>
-        </Layout.Footer>
-    );
-}
+const Footer: FunctionComponent<any> = (props) => {
+  return (
+    <Layout.Footer style={{ textAlign: 'center', backgroundColor: '#fff' }} {...props}>
+      Copyright ©{getYear(new Date())} Created by Chacha
+    </Layout.Footer>
+  );
+};
+
+export default Footer;

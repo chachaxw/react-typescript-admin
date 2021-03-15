@@ -1,7 +1,18 @@
-import { Avatar, Badge, Dropdown, Icon, Layout, Menu } from 'antd';
+import {
+  ArrowsAltOutlined,
+  BellOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  ProfileOutlined,
+  SearchOutlined,
+  SettingOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { Avatar, Badge, Dropdown, Layout, Menu } from 'antd';
 import { connect } from 'dva';
 import Debounce from 'lodash-decorators/debounce';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { UserInfo } from '../../models/global';
 import styles from './Header.module.scss';
@@ -9,13 +20,17 @@ import NoticePane from './NoticePane';
 
 const { ItemGroup } = Menu;
 
-interface InternalProps {
+interface DvaProps {
+  logout: () => void;
+  loadMoreNotices: (params?: any) => void;
+}
+
+interface InternalProps extends DvaProps {
   notices: any[];
   userInfo: UserInfo;
   collapsed: boolean;
   hasMore: boolean;
   fetchingNotices: boolean;
-  loadMoreNotices: (params?: any) => void;
   onCollapse: (collapsed: boolean) => void;
 }
 
@@ -23,7 +38,7 @@ interface InternalState {
   showNoticePane: boolean;
 }
 
-export class Header extends Component<InternalProps, InternalState> {
+export class Header extends PureComponent<InternalProps, InternalState> {
   private isFullScreen = false;
 
   private constructor(props: InternalProps) {
@@ -57,7 +72,7 @@ export class Header extends Component<InternalProps, InternalState> {
   }
 
   public signOut() {
-    // TODO: Need to finish sign out logic
+    this.props.logout();
   }
 
   public onVisibleChange(visible: boolean) {
@@ -69,13 +84,19 @@ export class Header extends Component<InternalProps, InternalState> {
       <Menu className={styles.dropdownMenu}>
         <Menu.Item key="hello">你好 - Chacha </Menu.Item>
         <ItemGroup title="设置中心">
-          <Menu.Item key="setting:3"><Icon type="user" /> 个人设置</Menu.Item>
-          <Menu.Item key="setting:4"><Icon type="setting" /> 系统设置</Menu.Item>
+          <Menu.Item key="setting:3">
+            <UserOutlined /> 个人设置
+          </Menu.Item>
+          <Menu.Item key="setting:4">
+            <SettingOutlined /> 系统设置
+          </Menu.Item>
         </ItemGroup>
         <ItemGroup title="用户中心">
-          <Menu.Item key="setting:2"><Icon type="profile" /> 个人信息</Menu.Item>
+          <Menu.Item key="setting:2">
+            <ProfileOutlined /> 个人信息
+          </Menu.Item>
           <Menu.Item key="signOut" onClick={() => this.signOut()}>
-            <Icon type="logout" /> 退出登录
+            <LogoutOutlined /> 退出登录
           </Menu.Item>
         </ItemGroup>
       </Menu>
@@ -84,35 +105,44 @@ export class Header extends Component<InternalProps, InternalState> {
 
   public render() {
     const { showNoticePane } = this.state;
-    const { collapsed, hasMore, notices, fetchingNotices,
-      loadMoreNotices, onCollapse, userInfo } = this.props;
+    const { collapsed, hasMore, notices, fetchingNotices, loadMoreNotices, onCollapse, userInfo } = this.props;
 
     return (
       <Layout.Header className={styles.header}>
-        <div className={styles.headerIcon} onClick={() => onCollapse(!collapsed)}>
-          <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
+        <div className={styles.menuBtn} onClick={() => onCollapse(!collapsed)}>
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </div>
         <div className={styles.headerRight}>
           <div className={styles.headerIcon}>
-            <Icon type="search" />
+            <SearchOutlined />
           </div>
           <div className={styles.headerIcon} onClick={() => this.setFullScreen()}>
-            <Icon type="arrows-alt" />
+            <ArrowsAltOutlined />
           </div>
-          <Dropdown visible={showNoticePane}
+          <Dropdown
+            visible={showNoticePane}
             onVisibleChange={(visible: boolean) => this.onVisibleChange(visible)}
-            overlay={<NoticePane
-              notices={notices} loading={fetchingNotices}
-              loadMoreNotices={(params: any) => loadMoreNotices(params)} hasMore={hasMore}
-              closeNoticePane={(visible: boolean) => this.onVisibleChange(visible)}/>}
+            overlay={
+              <NoticePane
+                notices={notices}
+                hasMore={hasMore}
+                loading={fetchingNotices}
+                loadMoreNotices={(params: any) => loadMoreNotices(params)}
+                closeNoticePane={(visible: boolean) => this.onVisibleChange(visible)}
+              />
+            }
           >
             <div className={styles.headerIcon}>
-              <Badge count={notices.length}><Icon type="bell" /></Badge>
+              <Badge count={notices.length}>
+                <BellOutlined />
+              </Badge>
             </div>
           </Dropdown>
-          <Dropdown  overlay={() => this.renderDropdownMenu(userInfo)}>
+          <Dropdown overlay={() => this.renderDropdownMenu(userInfo)}>
             <div className={styles.headerIcon}>
-              <Avatar size={32} style={{backgroundColor: '#f56a00', fontSize: 28}}>C</Avatar>
+              <Avatar size={32} style={{ backgroundColor: '#f56a00' }}>
+                C
+              </Avatar>
             </div>
           </Dropdown>
         </div>
@@ -124,9 +154,9 @@ export class Header extends Component<InternalProps, InternalState> {
 const mapStateToProps = ({ global, loading }: any) => {
   return {
     notices: global.notices,
+    hasMore: global.hasMore,
     userInfo: global.userInfo,
     collapsed: global.collapsed,
-    hasMore: global.hasMore,
     fetchingNotices: loading.effects['global/fetchNotifications'],
   };
 };
@@ -134,16 +164,15 @@ const mapStateToProps = ({ global, loading }: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onCollapse: (collapsed: boolean) => {
-      dispatch({
-        type: 'global/changeLayoutCollapsed',
-        payload: collapsed,
-      });
+      dispatch({ type: 'global/changeLayoutCollapsed', payload: collapsed });
     },
+
+    logout: () => {
+      dispatch({ type: 'global/logout' });
+    },
+
     loadMoreNotices: (params?: any) => {
-      dispatch({
-        type: 'global/fetchNotifications',
-        payload: params,
-      });
+      dispatch({ type: 'global/fetchNotifications', payload: params });
     },
   };
 };

@@ -1,9 +1,19 @@
-var Mock = require('mockjs');
-var data = Mock.mock({
-    'api/list|1-10': [{
-        // 属性 id 是一个自增数，起始值为 1，每次增 1
-        'id|+1': 1
-    }]
-});
+const faker = require('faker');
+const Random = faker.random;
 
-console.log('Mock data', data);
+module.exports = function() {
+  let dashboard = [];
+
+  for (let i = 0; i < 10; i++) {
+    dashboard.push({
+      id: Random.uuid(),
+      title: Random.word(4, 8),
+      desc: Random.words(30, 50),
+      tag: Random.word(2, 5),
+      views: Random.number(),
+      images: Random.image(),
+    });
+  }
+
+  return dashboard;
+}

@@ -1,0 +1,184 @@
+/********** Color Variables **********/
+$primary-color: #1890ff;
+$primary-color-light: #f2f7ff;
+$base-dark-color: #3e4a5b;
+$black-color: #000;
+$white-color: #fff;
+$green-color: #07bd13;
+$blue-grey-color: #b2c0c8;
+$page-background: #f0f2f5;
+$light-grey-color: #f4f5f7;
+$scroll-bar-background: #828384;
+$grey-border-color: #d9d9d9;
+$danger-color: #e85050;
+$secondary-color: #42a1c1;
+$layout-side-color: #16171a;
+
+// Media query variables
+$screen-xs: 575px;
+$screen-sm: 767px;
+$screen-md: 991px;
+$screen-lg: 1199px;
+$screen-sl: 1599px;
+
+// Layout variables
+$page-header: 64px;
+$page-footer: 70px;
+
+// Media query mixin function
+@mixin respond-to($media) {
+  @if $media== 'screen-xs' {
+    @media only screen and (max-width: $screen-xs) {
+      @content;
+    }
+  } @else if $media== 'screen-sm' {
+    @media only screen and (min-width: $screen-xs + 1) and (max-width: $screen-sm) {
+      @content;
+    }
+  } @else if $media== 'screen-md' {
+    @media only screen and (min-width: $screen-sm + 1) and (max-width: $screen-md) {
+      @content;
+    }
+  } @else if $media== 'screen-lg' {
+    @media only screen and (min-width: $screen-md + 1) and (max-width: $screen-lg) {
+      @content;
+    }
+  } @else if $media== 'screen-xl' {
+    @media only screen and (min-width: $screen-lg + 1) and (max-width: $screen-sl) {
+      @content;
+    }
+  } @else if $media== 'screen-sl' {
+    @media only screen and (min-width: $screen-sl + 1) {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$media}`. ';
+  }
+}
+
+/********** Global styles **********/
+
+.ant-modal {
+  .ant-modal-body {
+    max-height: 600px;
+    overflow: auto;
+
+    .ant-form {
+      .ant-form-item {
+        margin-bottom: 12px;
+      }
+    }
+
+    // 手机端最大高度 380px
+    @include respond-to('screen-xs') {
+      max-height: 380px;
+    }
+  }
+}
+
+@mixin customize-scroll-bar($width: 6px, $radius: 10px, $color: $scroll-bar-background) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $radius;
+    box-shadow: inset 0 0 5px rgba($black-color, 0.2);
+    background: $color;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba($white-color, 0.1);
+    box-shadow: inset 0 0 5px rgba($black-color, 0.2);
+  }
+}
+
+/***** 全局弹性盒子 *****/
+@mixin flex-box($direction: row, $justify: center, $align: center, $flex-wrap: null) {
+  display: flex;
+
+  @if ($direction !=null) {
+    flex-direction: $direction;
+  }
+
+  @if ($justify !=null) {
+    justify-content: $justify;
+  }
+
+  @if ($align !=null) {
+    align-items: $align;
+  }
+
+  @if ($flex-wrap !=null) {
+    flex-wrap: $flex-wrap;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/***** 单行多余字符省略... *****/
+@mixin ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/***** 椭圆渐变 *****/
+.gradientOval {
+  position: absolute;
+  left: 50%;
+  top: -53px;
+  width: 90%;
+  height: 60px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  opacity: 0.7;
+  filter: blur(18px);
+  background-image: linear-gradient(90deg, #2b55ff 12%, #2bb7ff 87%);
+}
+
+/***** 全局 Table 基础样式 *****/
+.base-table {
+  position: relative;
+  margin: 12px 16px 16px;
+  background-color: $white-color;
+}
+
+.button-group .ant-btn-link {
+  padding: 0 8px;
+}
+
+/***** 全局 Form 基础样式 *****/
+.base-form,
+.base-table .ant-table-title {
+  .ant-form-item {
+    margin-bottom: 12px;
+  }
+
+  .ant-form-item-label {
+    line-height: 32px;
+  }
+}
+
+/***** 全局 Tabs Table 基础样式 *****/
+.ant-tabs .ant-tabs-top-content > .ant-tabs-tabpane,
+.ant-tabs .ant-tabs-bottom-content > .ant-tabs-tabpane {
+  .base-table {
+    margin: 0;
+  }
+}
+
+.card-hoverable {
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 10px, rgba(0, 0, 0, 0.2) 0px 0px 1px;
+}
+
+/***** 全局 Cascader 基础样式 *****/
+.ant-cascader-menu {
+  height: 260px;
+}

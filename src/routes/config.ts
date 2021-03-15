@@ -5,11 +5,11 @@ export interface RouteConfig {
   auth?: string;
   query?: string;
   hideInMenu?: boolean;
-  component: string;
+  component?: string;
   children?: RouteConfig[];
 }
 
-export default {
+export const appRoutes: { [key: string]: RouteConfig[] } = {
   app: [
     {
       name: '控制台',
@@ -33,7 +33,26 @@ export default {
       name: '设置中心',
       icon: 'setting',
       path: '/app/setting',
-      component: 'SettingCenter',
+      children: [
+        {
+          name: '消息设置',
+          icon: 'setting',
+          path: '/app/setting/message',
+          component: 'MessageSetting',
+        },
+        {
+          name: '系统设置',
+          icon: 'setting',
+          path: '/app/setting/system',
+          component: 'MessageSetting',
+        },
+        {
+          name: '用户设置',
+          icon: 'setting',
+          path: '/app/setting/user',
+          component: 'SettingCenter',
+        },
+      ],
     },
     {
       name: '用户中心',

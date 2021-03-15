@@ -1,6 +1,5 @@
 import { Avatar, Empty, List, Skeleton } from 'antd';
 import { format } from 'date-fns';
-import { Link } from 'dva/router';
 import React, { PureComponent } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import Loading from '../Loading/Loading';
@@ -35,9 +34,7 @@ class NoticePane extends PureComponent<InternalProps, InternalState> {
           <List.Item.Meta
             avatar={<Avatar src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png" />}
             title={
-              <div>
-                订单<Link to={`/app/order/detail/${props.id}`}>{props.orderNumber}</Link> 预约配送
-              </div>
+              <div>Welcome to use React Typescript Admin</div>
             }
             description={format(props.createdTime, 'YYYY-MM-DD HH:mm:ss')}
           />
